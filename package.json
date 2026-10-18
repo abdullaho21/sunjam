@@ -1,0 +1,13 @@
+{
+  "name": "lamma-trivia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Arabic team trivia with a curated category library and Anime OP & ED",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node tests/game.test.mjs",
+    "check": "node --check app.mjs && node --check core.mjs && node --check data.mjs"
+  }
+}

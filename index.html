@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6b42db">
+  <meta name="description" content="لَمّة: لعبة أسئلة عربية لفريقين. اختاروا فئاتكم، تحدّوا بعض، واجمعوا النقاط. مع فئات أنمي OP و ED وبنك أسئلة قابل للتوسعة.">
+  <title>لَمّة — كل سؤال يجمعنا</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">انتقل للمحتوى</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="لَمّة، الرئيسية"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>لَمّة<span class="brand-dot">.</span></span></a>
+      <nav aria-label="القائمة الرئيسية"><button data-nav="home" class="nav-link active">فئات اللعب</button><button data-nav="library" class="nav-link">بنك الأسئلة</button><button data-action="rules" class="nav-link">كيف نلعب؟</button></nav>
+      <button class="button button-outline header-resume" data-action="resume" hidden>↶ أكمل لعبتك</button>
+      <span class="header-note">كل سؤال يجمعنا <span>✦</span></span>
+    </div>
+  </header>
+  <main id="main" tabindex="-1"></main>
+  <footer class="site-footer"><a class="brand small" href="/">لَمّة.</a><span>للجمعة، للتحدي، وللواحد اللي يعرف كل شيء.</span><button data-action="about" class="text-button">عن الأسئلة والمصادر</button></footer>
+  <dialog id="modal" aria-labelledby="modal-title"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.mjs"></script>
+</body>
+</html>
