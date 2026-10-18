@@ -1,3 +1,15 @@
+# Current update — 18 October 2026
+
+The question overhaul is implemented in the current source: 51 categories and 306 entries (288 text questions plus 18 listening rounds). Explicit 200/400/600 difficulty replaces position-based assignment. OP/ED and general songs use official YouTube sources, 15-second bounds, a collapsed host player, a manual answer timer and reveal. The user chose familiarity/niche as the main music difficulty control; all clips stay 15 seconds and Blue Bird is omitted.
+
+See README.md for the current import format, validation, saved-game compatibility and source limitations. The original state below is retained as historical context and is superseded by this update.
+
+Vercel publishing is blocked: explicit access to `team_c9vWqAC5SmzmG8DCsXkJGKpX` returned 403 and the connector listed no teams. No Vercel CLI with independent credentials is installed. Do not claim the new source is deployed at the production URL.
+
+---
+
+## Historical handoff before this update
+
 # Sunjam / Lamma — continue on Linux
 
 Saved on 18 October 2026 after the Windows build session.
