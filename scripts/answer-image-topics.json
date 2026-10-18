@@ -1,0 +1,389 @@
+{
+  "anime-op": [
+    "Demon Slayer: Kimetsu no Yaiba (TV series)",
+    "Chainsaw Man",
+    "Jujutsu Kaisen",
+    "Tokyo Ghoul",
+    "Serial Experiments Lain",
+    "Fate/stay night: Unlimited Blade Works (TV series)"
+  ],
+  "anime-ed": [
+    "Jujutsu Kaisen",
+    "Attack on Titan",
+    "Frieren",
+    "Spy × Family",
+    "No. 6",
+    "Bleach (manga)"
+  ],
+  "rdr2": [
+    "Arthur Morgan",
+    null,
+    "Arthur Morgan",
+    null,
+    null,
+    null
+  ],
+  "romance-anime": [
+    "Sadako Yamamura",
+    "Kyo Sohma",
+    "Tsubaki Sawabe",
+    "Makoto Sunakawa",
+    "Osamu Dazai",
+    "Kazuma Sohma"
+  ],
+  "metroidvania": [
+    null,
+    "Alucard (Castlevania)",
+    null,
+    null,
+    null,
+    null
+  ],
+  "jrpg": [
+    null,
+    "Blitzball",
+    "Frog (Chrono Trigger)",
+    null,
+    null,
+    null
+  ],
+  "linear-fps": [
+    "BT-7274",
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "character-action": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "anime": [
+    "Alphonse Elric",
+    null,
+    null,
+    "Zero (Code Geass)",
+    "Johan Liebert",
+    "Serial Experiments Lain"
+  ],
+  "naruto": [
+    null,
+    "Hiruzen Sarutobi",
+    null,
+    "Orochimaru (Naruto)",
+    null,
+    "Sakumo Hatake"
+  ],
+  "one-piece": [
+    "Going Merry",
+    null,
+    null,
+    "Franky",
+    null,
+    null
+  ],
+  "attack-on-titan": [
+    null,
+    "Erwin Smith",
+    "Historia Reiss",
+    null,
+    null,
+    null
+  ],
+  "hunter": [
+    null,
+    "Killua Zoldyck",
+    "Chrollo Lucilfer",
+    "Biscuit Krueger",
+    null,
+    null
+  ],
+  "bleach": [
+    null,
+    "Byakuya Kuchiki",
+    null,
+    null,
+    "Retsu Unohana",
+    "Zangetsu"
+  ],
+  "demon-slayer": [
+    "Sakonji Urokodaki",
+    null,
+    [
+      "Daki",
+      "Gyutaro"
+    ],
+    "Hotaru Haganezuka",
+    "Akaza",
+    null
+  ],
+  "dragon-ball": [
+    "Goku",
+    "King Kai",
+    [
+      "Jeice",
+      "Burter"
+    ],
+    "Gotenks",
+    null,
+    "Supreme Kai"
+  ],
+  "pokemon": [
+    null,
+    null,
+    null,
+    null,
+    [
+      "Lorelei (Pokémon)",
+      "Agatha (Pokémon)"
+    ],
+    null
+  ],
+  "games": [
+    "Master Sword",
+    "Aperture Science",
+    null,
+    "Normandy (Mass Effect)",
+    null,
+    "Nomai"
+  ],
+  "elden-ring": [
+    "Godrick the Grafted",
+    null,
+    null,
+    "Starscourge Radahn",
+    null,
+    null
+  ],
+  "minecraft": [
+    "Obsidian",
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "resident-evil": [
+    "Ashley Graham",
+    "Raccoon City",
+    null,
+    "Baker family",
+    [
+      "Suit (cards)"
+    ],
+    null
+  ],
+  "valorant": [
+    "Cypher (Valorant)",
+    "Viper (Valorant)",
+    "Omen (Valorant)",
+    "Gekko (Valorant)",
+    "KAY/O",
+    null
+  ],
+  "general": [
+    "Silver",
+    "Gabriel García Márquez",
+    "Henry (unit)",
+    "Stapes",
+    "Mohorovičić discontinuity",
+    "L. L. Zamenhof"
+  ],
+  "technology": [
+    "Random-access memory",
+    "Domain Name System",
+    "Document Object Model",
+    "RSA cryptosystem",
+    "Halting problem",
+    "Bernoulli number"
+  ],
+  "animals": [
+    "Platypus",
+    "Octopus",
+    "Mutualism (biology)",
+    "Marsupial",
+    "Ampullae of Lorenzini",
+    "Turritopsis dohrnii"
+  ],
+  "history": [
+    "Fall of Constantinople",
+    "Inca Empire",
+    "Treaty of Tordesillas",
+    "Hannibal",
+    "Magna Carta",
+    "Battle of Actium"
+  ],
+  "literature": [
+    "Tayeb Salih",
+    "Imru' al-Qais",
+    "Al-Ma'arri",
+    "Al-Harith ibn Hammam",
+    "Marcel Proust",
+    null
+  ],
+  "geography": [
+    "Strait of Gibraltar",
+    "Andes",
+    "Lake Baikal",
+    "Bab-el-Mandeb",
+    "Prime meridian (Greenwich)",
+    "Lake Titicaca"
+  ],
+  "capitals": [
+    "Prague",
+    "Budapest",
+    "Tbilisi",
+    "Ulaanbaatar",
+    "Thimphu",
+    "Nukuʻalofa"
+  ],
+  "flags": [
+    "Flag of Bhutan",
+    "Flag of Lebanon",
+    [
+      "Flag of Romania",
+      "Flag of Chad"
+    ],
+    "Flag of Guatemala",
+    "Flag of Turkmenistan",
+    "Flag of Kiribati"
+  ],
+  "currencies": [
+    "Polish zloty",
+    "Deutsche Mark",
+    "South Korean won",
+    "French franc",
+    "Dutch guilder",
+    "Hungarian forint"
+  ],
+  "saudi": [
+    "Diriyah",
+    "At-Turaif",
+    "Al-Ahsa Oasis",
+    "Jeddah",
+    null,
+    null
+  ],
+  "islam": [
+    null,
+    "Battle of the Trench",
+    null,
+    null,
+    null,
+    null
+  ],
+  "quran": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "riddles": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "reverse": [
+    "Ruler",
+    "Key (lock)",
+    null,
+    null,
+    null,
+    null
+  ],
+  "movies": [
+    "Spinning top",
+    "Neo (The Matrix)",
+    "Denethor",
+    null,
+    null,
+    null
+  ],
+  "harry-potter": [
+    "Marauder's Map",
+    "Helena Ravenclaw",
+    "Otter",
+    "Severus Snape",
+    [
+      "Remus Lupin",
+      "Peter Pettigrew",
+      "Sirius Black",
+      "James Potter"
+    ],
+    "The Tales of Beedle the Bard"
+  ],
+  "friends": [
+    "Ursula Buffay",
+    "Joey Tribbiani",
+    "Chandler Bing",
+    null,
+    null,
+    null
+  ],
+  "breaking-bad": [
+    "Los Pollos Hermanos",
+    "Marie Schrader",
+    null,
+    null,
+    null,
+    "Baby Blue (Badfinger song)"
+  ],
+  "marvel": [
+    "J.A.R.V.I.S.",
+    "Shuri (Marvel Cinematic Universe)",
+    null,
+    null,
+    null,
+    null
+  ],
+  "sports": [
+    null,
+    null,
+    "Darts",
+    "Usain Bolt",
+    "Dick Fosbury",
+    "Mark Spitz"
+  ],
+  "nba": [
+    "Allen Iverson",
+    "Utah Jazz",
+    "Kawhi Leonard",
+    "Detroit Pistons",
+    "Nate Thurmond",
+    "Charlotte Hornets"
+  ],
+  "f1": [
+    "Fernando Alonso",
+    "Circuit de Monaco",
+    "Brawn GP",
+    "Heikki Kovalainen",
+    "1998 Belgian Grand Prix",
+    "Brabham BT46"
+  ],
+  "grammar": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "cartoons": [
+    "Alfredo (Romeo's Blue Skies)",
+    "Jimsy",
+    "Ai Haibara",
+    "Agumon",
+    null,
+    "Becky (A Little Princess)"
+  ]
+}

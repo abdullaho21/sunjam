@@ -1,3 +1,4 @@
+import {answerImagesFor} from './answer-images.mjs';
 import {BANKS} from './question-bank.mjs';
 import {AUDIO_BANKS} from './audio-bank.mjs';
 import {validateMedia,clipUrls} from './media.mjs';
@@ -92,3 +93,6 @@ const checkedSources = {
   'dragon-ball-v2-6':'https://dragonball.fandom.com/wiki/South_Supreme_Kai',
 };
 for (const q of QUESTIONS) if(checkedSources[q.id]) q.source=checkedSources[q.id];
+
+// Store artwork with the question so exports and new saved matches retain it.
+for(const q of QUESTIONS){const images=answerImagesFor(q);if(images.length)q.answerImages=images;}

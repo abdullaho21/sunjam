@@ -1,3 +1,4 @@
+import {validateAnswerImages} from './answer-images.mjs';
 import {AUDIO_CATEGORY_IDS,validateMedia,clipUrls} from './media.mjs';
 export const POINTS = [200, 200, 400, 400, 600, 600];
 export const STORAGE_KEY = 'lamma.game.v1';
@@ -69,7 +70,7 @@ export function undoLast(game) {
 }
 export function isGame(value) {
   if (Array.isArray(value?.deck)) {
-    try { for (const q of value.deck) if(q.type==='audio'||q.media) validateMedia(q.media); }
+    try { for (const q of value.deck) {if(q.type==='audio'||q.media)validateMedia(q.media);if(q.answerImages!==undefined)validateAnswerImages(q.answerImages);} }
     catch { return false; }
   }
   return value?.version===1 && Array.isArray(value.categoryIds) && value.categoryIds.length===6 && Array.isArray(value.teams) && value.teams.length===2 && value.teams.every(t=>typeof t.name==='string'&&Number.isFinite(t.score)&&t.helpers&&['hint','time','double'].every(k=>typeof t.helpers[k]==='boolean')) && [0,1].includes(value.turn) && [30,60,90].includes(value.seconds) && Array.isArray(value.deck) && value.deck.length===36 && value.deck.every(q=>typeof q.slot==='string'&&typeof q.question==='string'&&typeof q.answer==='string'&&[200,400,600].includes(q.points)&&typeof q.resolved==='boolean') && Array.isArray(value.history) && (!value.active || (typeof value.active.slot==='string'&&Number.isFinite(value.active.deadline)&&Number.isFinite(value.active.remaining)&&[1,2].includes(value.active.multiplier)));
@@ -94,7 +95,8 @@ export function validatePack(raw, {allowLegacyAudioText=false}={}) {
     if(!allowLegacyAudioText && AUDIO_CATEGORY_IDS.includes(q.categoryId) && type!=='audio')
       throw new Error('فئات OP وED والأغاني تحتاج مقاطع استماع، وليست أسئلة نصية.');
     const media=type==='audio'?validateMedia(q.media):undefined;
-    return {id,categoryId:q.categoryId,question:q.question.trim(),answer:q.answer.trim(),points:q.points,hint:typeof q.hint==='string'?q.hint.slice(0,300):'لا يوجد تلميح لهذا السؤال.',source:media?clipUrls(media).watch:source,origin:'imported',type,...(media?{media}:{})};
+    const answerImages=q.answerImages===undefined?undefined:validateAnswerImages(q.answerImages);
+    return {id,categoryId:q.categoryId,question:q.question.trim(),answer:q.answer.trim(),points:q.points,hint:typeof q.hint==='string'?q.hint.slice(0,300):'لا يوجد تلميح لهذا السؤال.',source:media?clipUrls(media).watch:source,origin:'imported',type,...(media?{media}:{}),...(answerImages?{answerImages}:{})};
   });
   if(!categories.length) throw new Error('أضف فئة واحدة على الأقل');
   for(const c of categories) for(const p of [200,400,600]) if(questions.filter(q=>q.categoryId===c.id&&q.points===p).length<2) throw new Error(`${c.name}: أضف سؤالين على الأقل لكل مستوى (٢٠٠، ٤٠٠، ٦٠٠)`);

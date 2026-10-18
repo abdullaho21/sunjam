@@ -27,3 +27,14 @@ dialog{padding:0;border:0;border-radius:21px;background:white;color:var(--ink);m
 .audio-credits span{font-size:13px;color:#665c78}
 .audio-round a,.audio-credits a{color:#6b42db;font-size:14px}
 @media(max-width:480px){.audio-round{padding:16px}.audio-controls .button{width:100%}}
+
+/* Answer artwork is inserted only after reveal, never as a hidden question-side image. */
+.answer-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0;text-align:center}
+.answer-images.single{grid-template-columns:minmax(0,1fr)}
+.answer-image{margin:0;min-width:0;background:#fff;border:1px solid #e7dff3;border-radius:14px;overflow:hidden}
+.answer-image[hidden]{display:none}
+.answer-image img{display:block;width:100%;height:230px;object-fit:contain;background:#f7f4fb;padding:12px;box-sizing:border-box}
+.answer-images.single img{height:290px;max-height:40vh}
+.answer-image figcaption{padding:10px 12px;display:flex;flex-direction:column;gap:5px;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.answer-image figcaption a{font-size:11px;color:#6b42db}
+@media(max-width:520px){.answer-images{grid-template-columns:minmax(0,1fr)}.answer-image img,.answer-images.single img{height:220px}}

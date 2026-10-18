@@ -1,6 +1,7 @@
 import {CATEGORIES,QUESTIONS,EXCLUDED_GROUPS,REQUESTED_IDS,CONTENT_REVISION} from './data.mjs';
 import {STORAGE_KEY,CUSTOM_KEY,normalize,questionKey,shuffle,createGame,openQuestion,useHelper,revealAnswer,resolveQuestion,undoLast,isGame,validatePack} from './core.mjs';
 
+import {answerImagesMarkup} from './answer-images.mjs';
 import {AUDIO_CATEGORY_IDS} from './media.mjs';
 import {audioRoundMarkup,audioCreditsMarkup,mountClip} from './audio-view.mjs';
 
@@ -25,6 +26,7 @@ function playable(id){return [200,400,600].every(p=>questions.filter(q=>q.catego
 function mergedCatalogue(){const names=new Set(categories.map(c=>normalize(c.name)));names.add(normalize('Red Dead'));return catalogue.filter(c=>!names.has(normalize(c.name)));}
 function showModal(content,wide=false){const wasOpen=modal.open;if(!wasOpen)previousFocus=document.activeElement;modal.innerHTML=`<div class="modal-shell ${wide?'wide':''}"><button type="button" class="modal-close" data-action="close" aria-label="إغلاق النافذة">×</button>${content}</div>`;if(!wasOpen)modal.showModal();}
 function closeModal(){$('#clip-player')?.replaceChildren();modal.close();previousFocus?.focus?.();}
+modal.addEventListener('error',e=>{if(e.target.matches?.('.answer-image img'))e.target.closest('figure').hidden=true;},true);
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
 modal.addEventListener('close',()=>{if(!modal.open){$('#clip-player')?.replaceChildren();previousFocus?.focus?.();}});
 modal.addEventListener('toggle',e=>{if(e.target.matches?.('.host-audio')&&!e.target.open)$('#clip-player')?.replaceChildren();},true);
@@ -55,7 +57,7 @@ function showQuestion(){
       <div class="question-helpers"><button data-helper="hint" ${helpers.hint?'disabled':''}>◈ تلميح ${helpers.hint?'✓':''}</button><button data-helper="time" ${helpers.time?'disabled':''}>◷ +٣٠ ثانية ${helpers.time?'✓':''}</button><button data-helper="double" ${helpers.double?'disabled':''}>×٢ ضاعف النقاط ${helpers.double?'✓':''}</button></div>
       <button class="button button-primary full-width reveal-button" data-action="reveal">نكشف الإجابة <span>↙</span></button><p class="tiny-note">الاختيار بصوتكم. لن تُسجَّل نقاط إلا بعد كشف الإجابة.</p>
     `:`
-      <div class="answer-box"><span>الإجابة</span><strong>${esc(q.answer)}</strong>${listening?audioCreditsMarkup(q.media):q.source?`<a href="${esc(q.source)}" target="_blank" rel="noopener noreferrer">مصدر الإجابة ↗</a>`:''}</div>
+      <div class="answer-box"><span>الإجابة</span><strong>${esc(q.answer)}</strong>${answerImagesMarkup(q,true)}${listening?audioCreditsMarkup(q.media):q.source?`<a href="${esc(q.source)}" target="_blank" rel="noopener noreferrer">مصدر الإجابة ↗</a>`:''}</div>
       <div class="award-label">مين جاوب صح؟</div><div class="award-buttons">${game.teams.map((t,i)=>`<button class="button ${i===0?'award-purple':'award-green'}" data-award="${i}">${esc(t.name)} <span>+${digits(q.points*(i===game.turn?a.multiplier:1))}</span></button>`).join('')}<button class="button button-quiet" data-award="none">ولا أحد</button></div>
     `}
     <div class="question-dismiss-note">يمكنك إغلاق النافذة والرجوع للسؤال من «أكمل السؤال».</div>

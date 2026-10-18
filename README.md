@@ -61,7 +61,7 @@ Every imported category must have at least two questions at each of 200, 400 and
 
 ## Deploy on Vercel
 
-The included `vercel.json` configures a static deployment: `npm run build` copies the eleven runtime files to `dist/`. No dependencies or environment variables are needed. Tests, local preview helpers, and documentation are kept out of the published build.
+The included `vercel.json` configures a static deployment: `npm run build` copies the thirteen runtime files to `dist/`. No dependencies or environment variables are needed. Tests, local preview helpers, and documentation are kept out of the published build.
 
 ## Validation
 
@@ -75,6 +75,18 @@ Existing matches retain their stored questions and score; a notice identifies ol
 
 ## Checks for this update
 
-13 automated checks cover the original match/scoring behavior plus media validation, imports, hidden pre-reveal track metadata, clip identity, pause-on-open and persistence. Browser QA checked category selection, a 36-question match, the official host player, reveal/award/double points, undo and reload. YouTube timing uses its [documented start/end parameters](https://developers.google.com/youtube/player_parameters); seek boundaries may align to a nearby keyframe. Playback in every region and every source was not manually auditioned.
+17 automated checks cover the original match/scoring behavior plus media validation, imports, hidden pre-reveal track metadata, clip identity, pause-on-open and persistence. Browser QA checked category selection, a 36-question match, the official host player, reveal/award/double points, undo and reload. YouTube timing uses its [documented start/end parameters](https://developers.google.com/youtube/player_parameters); seek boundaries may align to a nearby keyframe. Playback in every region and every source was not manually auditioned.
 
 Publishing this update to the existing Vercel project is currently blocked by a 403 for its team scope. The connected account listed no teams, and no separately authenticated Vercel CLI was available. The previous production site is unchanged.
+
+## Answer pictures (19 October 2026)
+
+The reveal screen now shows curated pictures for **133 answers**, including **all 18 listening rounds**. Anime work artwork or official track thumbnails accompany music answers; other curated subjects include character portraits, game items, flags, cities, animals and historical figures. Gustave and Maelle use the official Expedition 33 character artwork. Character and item wiki assets, Wikipedia page images, and PokeAPI’s official-artwork collection have source links on each image. Some images are work cover art or diagrams, as identified by their caption. No image is generated from an answer-name search at runtime.
+
+An image element is inserted only after Reveal, with alt text, a caption and a source link. The browser never preloads an answer picture while showing its question. If a remote image fails, its figure is hidden and the written answer/scoring remain usable. Answers without a verified suitable illustration remain text; the game does not substitute random category art. Remote artwork availability and reuse terms depend on its source, linked next to the picture.
+
+Image metadata is in `answer-image-data.mjs`. `scripts/answer-image-topics.json` holds curated encyclopedia subjects; `scripts/answer-image-overrides.json` holds verified exact portraits and game assets. `python3 scripts/resolve-answer-images.py` refreshes the metadata through public page-image APIs and reapplies the reviewed overrides. This maintenance step requires network access; normal builds do not. Scratch research files in `work/` are excluded from source control.
+
+Imported questions may supply `answerImages`, an array of up to four `{url, alt, source, caption, credit}` objects. Image and source URLs require HTTPS and must not contain credentials. Metadata survives JSON export/import and saved games. Existing seed matches without image metadata use the new curated mappings; imported IDs cannot impersonate seed artwork mappings.
+
+Four additional automated checks cover pre-reveal absence, music/portrait coverage, persistence/imports and unsafe URL/markup rejection. Browser QA verified a real official Gustave portrait and anime artwork loading after Reveal, including the mobile layout.

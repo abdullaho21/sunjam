@@ -1,3 +1,7 @@
+# Answer-image update — 19 October 2026
+
+Added reveal-only images for 133 answers, including all 18 listening rounds. The renderer, validated import fields, static image manifest and reproducible source metadata scripts are included. Seventeen automated checks pass and browser QA confirmed hidden-before-reveal/visible-after-reveal images with actual remote artwork loading. See README.md for coverage, attribution and remote-image limits. Vercel publication remains blocked as previously recorded; this is an update to the same GitHub PR.
+
 # Current update — 18 October 2026
 
 The question overhaul is implemented in the current source: 51 categories and 306 entries (288 text questions plus 18 listening rounds). Explicit 200/400/600 difficulty replaces position-based assignment. OP/ED and general songs use official YouTube sources, 15-second bounds, a collapsed host player, a manual answer timer and reveal. The user chose familiarity/niche as the main music difficulty control; all clips stay 15 seconds and Blue Bird is omitted.
