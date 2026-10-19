@@ -1,76 +1,15 @@
-# Sunjam / Lamma — continue on Linux
+# Current state — 20 October 2026
 
-Saved on 18 October 2026 after the Windows build session.
+Bank: 51 categories × 24 entries = 1,224 (1,152 text + 72 listening), eight per point tier. Original IDs remain stable; question-supplement.mjs appends six rows per text category. The previous twelve-row expansion is retained. Several weak 600-point questions were replaced by precise mechanics, conditions and costs. Arabic corrections retain short English terms in parentheses where clearer; ARABIC_STYLE.md records the principles, references and access limits. There are 184 illustrated answers, including all listening rounds.
 
-- Source repository: https://github.com/abdullaho21/sunjam
-- Live game: https://lamma-trivia.vercel.app
-- Main implementation commit: `e4cba46f71e7fb0520044b71860711a1bce53080`
+Selection: Change selection, Close, backdrop and Escape cancel the active question without points or changing the turn. Question-specific helpers are refunded. If the answer was revealed it is remembered as finished; otherwise it remains unfinished. Reopening draws a different eligible question when one exists. Cancelling a reopened undo question clears its answerSeen lock. Scores are only awarded explicitly. Category cards distinguish bank totals from the six match tiles.
 
-This document describes the repository's technical state so work can continue on Linux. It contains no full chat transcript or chat-sharing URL.
+History: anonymous cookie ID + localStorage flags, unfinished/unencountered preference, full-category reset only; exhausted tiers wait. Saved scores survive updates; new draws use the current bank. Storage-blocked sessions fall back to memory.
 
-## User's requirements
+Listening: opaque black curtain, on-demand YouTube player, manual answer timer, lifecycle cleanup, answer art/credits on reveal. All 72 recordings have distinct IDs per category and 15-second bounds. Sources are official artists, labels, licensed Topic or distributor uploads; regional/embedding availability still varies. No music or lyrics are bundled.
 
-Build an Arabic team trivia competitor inspired by https://seenjeemkw.com/ and keep the existing public categories except these groups:
+Validation: 35 automated checks, module syntax and 16-file static build pass. Browser QA verified all cards at 24 and total 1,224; BG3 400 → RDR2 200 → BG3 400 changes the question; revealed cancellation works through Change selection and Close without scoring; persisted history remains after reload; black listening screen and reveal artwork/credits work.
 
-`فن خليجي`, `بنات`, `الأردن`, `البحرين`, `الإمارات`, `عمان`, `قطر`, `الكويت`, `مسرح`, `فن عربي`, `أغاني`, `فن تركي`, `كرة قدم`.
+Release: production is now READY at https://lamma-trivia.vercel.app. Deployment dpl_gXQaYdXc62LQiV7Yv2U8g1Pmht95 was built from source commit d6cd817f94424cc46cc8872b4bd0fd45d50f8005 in the existing project prj_J2n7RBMx5UR65t3Wbg9tdbyHDWwk. Both production aliases were assigned without alias errors. The live browser now shows 1,224 entries and every card at 24. Production regression confirmed BG3 400 → RDR2 200 → BG3 400 changes the clue; cancelling after reveal keeps both scores at zero, the board at 0/36 and history at 1/24 after reload. PR https://github.com/abdullaho21/sunjam/pull/1 contains the release; this documentation-only follow-up records the verified outcome.
 
-The removal list was interpreted as whole groups, with related country, football and song categories also filtered from the new-category section.
-
-Add these requested categories:
-
-- Anime OP and Anime ED.
-- Red Dead Redemption 2.
-- Clair Obscur: Expedition 33.
-- General roguelites.
-- The Witcher 3.
-- Baldur's Gate 3.
-- Romance anime, excluding ecchi.
-- Metroidvania.
-- JRPG.
-- Linear FPS.
-- Character action games.
-
-## Implemented state
-
-The app is branded **لَمّة / Lamma** in the `sunjam` repository. It is a dependency-free HTML/CSS/JavaScript app with Arabic RTL layout. The seed bank has **50 playable categories and 378 original questions**, including all 12 requested additions above. There are **137 additional retained catalogue categories awaiting question content**. Those categories are clearly separated from playable categories.
-
-Games have two teams, six selected categories and 36 questions: two questions at each of 200, 400 and 600 points in each category. Players answer verbally, reveal the answer and select the winning team or no winner. Turns alternate after each question. There are three once-per-team helpers: hint, 30 extra seconds and double points. Undo, results, rematch, favorites and saved progress work.
-
-The question library supports browsing, creating categories and validating/importing/exporting JSON packs. Custom content and progress use browser localStorage; they are not synchronized between Windows and Linux. The application's seed bank and source files are stored in GitHub.
-
-## Content limitations to preserve
-
-- Public category names were collected with Firecrawl from https://seenjeemkw.com/start-game on 18 October 2026.
-- The full Seen Jeem question database was **not** obtained or copied. Starter questions were newly written. The app and README disclose this.
-- OP/ED questions use text clues about song names and performers. They do **not** currently play audio.
-- The romance bank covers Your Lie in April, Kimi ni Todoke, My Love Story!!, Fruits Basket and Tsuki ga Kirei. Do not add ecchi titles.
-- Visual/media-based catalogue categories still need suitable question content and assets.
-- This first version has no accounts, online rooms, payments or shared server-side question administration.
-
-## Run and validate on Linux
-
-```sh
-git clone https://github.com/abdullaho21/sunjam.git
-cd sunjam
-npm test
-npm run check
-npm run build
-npm run dev
-```
-
-No package installation or secrets are needed. The preview listens at `http://localhost:4173` by default. `npm run build` copies the seven runtime files into `dist/`. The included `vercel.json` uses this build.
-
-Validation completed in Windows: all seven automated tests pass; syntax checks and the static build pass. Browser QA covered category selection, team setup, a 36-question board, hints, extended time, doubled scoring, refresh/resume, reveal/award, undo, exclusions and custom category creation. The public Vercel deployment rendered successfully.
-
-## Deployment state
-
-- Existing Vercel project: `lamma-trivia`.
-- Project ID: `prj_J2n7RBMx5UR65t3Wbg9tdbyHDWwk`.
-- Latest verified deployment: `dpl_7ribXBn8166ndBhDsEqs6Zn8YfRF`, production, READY.
-- Stable URL: https://lamma-trivia.vercel.app
-- Deployment used uploaded static source files before GitHub access was granted. Automatic deployments from GitHub are **not confirmed/configured**. Do not claim the project is automatically linked to the repository.
-- GitHub access initially returned 403. The user enabled `sunjam` access for the connected GitHub app, and the complete application was then successfully committed to `main`.
-
-## Useful next work
-
-Read the user's next instruction. Likely extensions are more original questions for the retained catalogue, proper audio rounds for OP/ED, editorial fact checking, and connecting the existing Vercel project to this GitHub repository for automatic deployments. Do not silently replace the original questions with unverified copied question banks.
+Bundled Node (system PATH lacks Node/npm): /home/silver/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node. No dependencies. Existing localhost:4173 server serves source dynamically. dist/ and runtime work/ are ignored.

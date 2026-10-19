@@ -1,7 +1,14 @@
+import {validateAnswerImages} from './answer-images.mjs';
+import {AUDIO_CATEGORY_IDS,validateMedia,clipUrls} from './media.mjs';
 export const POINTS = [200, 200, 400, 400, 600, 600];
 export const STORAGE_KEY = 'lamma.game.v1';
 export const CUSTOM_KEY = 'lamma.custom.v1';
 export function normalize(value) { return String(value).normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640]/g, '').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').trim().toLowerCase(); }
+export function questionKey(q) {
+  return q.type==='audio'
+    ? `${q.categoryId}|audio|${q.media.videoId}|${q.media.startSeconds}|${q.media.endSeconds}`
+    : normalize(`${q.categoryId}|${q.question}`);
+}
 export function shuffle(items, rng = Math.random) {
   const copy = [...items];
   for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
@@ -23,13 +30,13 @@ export function createGame(ids, names, categories, questionBank, seconds = 60, r
     }
     chosen.forEach((q,i) => deck.push({...q,slot:`${id}:${i}`,resolved:false,winner:null,awarded:0}));
   }
-  return {version:1,id:`game-${Date.now()}`,createdAt:new Date().toISOString(),categoryIds:[...ids],teams:names.map(name => ({name:String(name).trim().slice(0,30),score:0,helpers:{hint:false,time:false,double:false}})),turn:0,seconds:[30,60,90].includes(Number(seconds))?Number(seconds):60,deck,active:null,history:[],finished:false};
+  return {version:1,contentRevision:4,id:`game-${Date.now()}`,createdAt:new Date().toISOString(),categoryIds:[...ids],teams:names.map(name => ({name:String(name).trim().slice(0,30),score:0,helpers:{hint:false,time:false,double:false}})),turn:0,seconds:[30,60,90].includes(Number(seconds))?Number(seconds):60,deck,active:null,history:[],finished:false};
 }
 export function openQuestion(game, slot, now=Date.now()) {
   if(game.active || game.finished) throw new Error('أكمل السؤال الحالي أولاً');
   const q=game.deck.find(q=>q.slot===slot);
   if(!q || q.resolved) throw new Error('هذا السؤال منتهٍ');
-  game.active={slot,deadline:now+game.seconds*1000,remaining:game.seconds,paused:false,revealed:false,hint:false,multiplier:1};
+  game.active={slot,deadline:now+game.seconds*1000,remaining:game.seconds,paused:q.type==='audio',revealed:false,hint:false,multiplier:1,helpersBefore:{...game.teams[game.turn].helpers}};
   return game;
 }
 export function useHelper(game, kind) {
@@ -41,7 +48,7 @@ export function useHelper(game, kind) {
   if(kind==='double') game.active.multiplier=2;
   return game;
 }
-export function revealAnswer(game) { if(!game.active) throw new Error('لا يوجد سؤال');game.active.revealed=true;return game; }
+export function revealAnswer(game) { if(!game.active) throw new Error('لا يوجد سؤال');game.active.revealed=true;game.deck.find(q=>q.slot===game.active.slot).answerSeen=true;return game; }
 export function resolveQuestion(game, winner) {
   if(!game.active?.revealed || ![0,1,null].includes(winner)) throw new Error('اكشف الإجابة قبل تسجيل النتيجة');
   const q=game.deck.find(q=>q.slot===game.active.slot);
@@ -62,9 +69,13 @@ export function undoLast(game) {
   game.turn=previous.turn;game.teams=previous.teams;game.finished=false;return game;
 }
 export function isGame(value) {
+  if (Array.isArray(value?.deck)) {
+    try { for (const q of value.deck) {if(q.type==='audio'||q.media)validateMedia(q.media);if(q.answerImages!==undefined)validateAnswerImages(q.answerImages);} }
+    catch { return false; }
+  }
   return value?.version===1 && Array.isArray(value.categoryIds) && value.categoryIds.length===6 && Array.isArray(value.teams) && value.teams.length===2 && value.teams.every(t=>typeof t.name==='string'&&Number.isFinite(t.score)&&t.helpers&&['hint','time','double'].every(k=>typeof t.helpers[k]==='boolean')) && [0,1].includes(value.turn) && [30,60,90].includes(value.seconds) && Array.isArray(value.deck) && value.deck.length===36 && value.deck.every(q=>typeof q.slot==='string'&&typeof q.question==='string'&&typeof q.answer==='string'&&[200,400,600].includes(q.points)&&typeof q.resolved==='boolean') && Array.isArray(value.history) && (!value.active || (typeof value.active.slot==='string'&&Number.isFinite(value.active.deadline)&&Number.isFinite(value.active.remaining)&&[1,2].includes(value.active.multiplier)));
 }
-export function validatePack(raw) {
+export function validatePack(raw, {allowLegacyAudioText=false}={}) {
   if(!raw || raw.version!==1 || !Array.isArray(raw.categories) || !Array.isArray(raw.questions)) throw new Error('الملف يحتاج version: 1 و categories و questions');
   if(raw.categories.length>200 || raw.questions.length>5000) throw new Error('الحد الأقصى ٢٠٠ فئة و٥٠٠٠ سؤال في الملف');
   const ids=new Set();
@@ -79,7 +90,13 @@ export function validatePack(raw) {
     if(qids.has(id)) throw new Error('معرّفات الأسئلة مكررة');qids.add(id);
     let source='';
     if(q.source){try{const url=new URL(q.source);if(url.protocol!=='https:') throw new Error();source=url.href;}catch{throw new Error(`رابط المصدر في السؤال ${i+1} يجب أن يبدأ بـ https://`);}}
-    return {id,categoryId:q.categoryId,question:q.question.trim(),answer:q.answer.trim(),points:q.points,hint:typeof q.hint==='string'?q.hint.slice(0,300):'لا يوجد تلميح لهذا السؤال.',source,origin:'imported'};
+    const type=q.type ?? (q.media?'audio':'text');
+    if(!['text','audio'].includes(type)) throw new Error(`نوع السؤال ${i+1} غير مدعوم`);
+    if(!allowLegacyAudioText && AUDIO_CATEGORY_IDS.includes(q.categoryId) && type!=='audio')
+      throw new Error('فئات OP وED والأغاني تحتاج مقاطع استماع، وليست أسئلة نصية.');
+    const media=type==='audio'?validateMedia(q.media):undefined;
+    const answerImages=q.answerImages===undefined?undefined:validateAnswerImages(q.answerImages);
+    return {id,categoryId:q.categoryId,question:q.question.trim(),answer:q.answer.trim(),points:q.points,hint:typeof q.hint==='string'?q.hint.slice(0,300):'لا يوجد تلميح لهذا السؤال.',source:media?clipUrls(media).watch:source,origin:'imported',type,...(media?{media}:{}),...(answerImages?{answerImages}:{})};
   });
   if(!categories.length) throw new Error('أضف فئة واحدة على الأقل');
   for(const c of categories) for(const p of [200,400,600]) if(questions.filter(q=>q.categoryId===c.id&&q.points===p).length<2) throw new Error(`${c.name}: أضف سؤالين على الأقل لكل مستوى (٢٠٠، ٤٠٠، ٦٠٠)`);
