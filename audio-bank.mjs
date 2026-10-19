@@ -1,4 +1,4 @@
-// Licensed platform playback only: no downloaded songs, lyrics, or rehosted media.
+// External platform embeds: no downloaded songs, lyrics, or rehosted media.
 // All rounds use 15 seconds. Familiarity, then less obvious passages, set the tiers.
 const clip = (points, answer, title, artist, channel, videoId, startSeconds, hint) => ({
   points, answer, hint, type:'audio',
@@ -30,3 +30,47 @@ export const AUDIO_BANKS = {
     clip(600,'Roads — Portishead','Roads','Portishead','Portishead / Universal Music Group','7nxWP9BhI7w',105,'من ألبوم Dummy الصادر عام 1994.'),
   ],
 };
+
+// Twelve additional recordings in each category, with four at every tier.
+AUDIO_BANKS['anime-op'].push(
+  clip(200,'SPY×FAMILY — عائلة فورجر','Mixed Nuts','Official Hige Dandism','Official Hige Dandism','CbH2F0kXgTY',45,'جاسوس وقاتلة وطفلة تقرأ الأفكار.'),
+  clip(200,'My Hero Academia — أكاديمية بطلي','Peace Sign','Kenshi Yonezu','Kenshi Yonezu / Sony Music Labels','EJAEzPwcQPs',45,'مدرسة يو إيه لتدريب الأبطال.'),
+  clip(200,'Fire Force — قوة النار','Inferno','Mrs. GREEN APPLE','Mrs. GREEN APPLE','wfCcs0vLysk',40,'شينرا ووحدة الإطفاء الخاصة الثامنة.'),
+  clip(200,'Hunter × Hunter — القناص','Departure!','Masatoshi Ono','Crunchyroll','faqmNf_fZlE',20,'رحلة غون للعثور على غينغ.'),
+  clip(400,'Noragami Aragoto — نوراغامي','Kyouran Hey Kids!!','THE ORAL CIGARETTES','THE ORAL CIGARETTES / Universal Music Group','cp3OV9pzlkE',65,'إله فقير يُدعى ياتو.'),
+  clip(400,'Blood Blockade Battlefront — Kekkai Sensen','Hello,world!','BUMP OF CHICKEN','BUMP OF CHICKEN / TOY’S FACTORY','RB7zvP8U5ak',45,'منظمة ليبرا في مدينة هيلسالمز لوت.'),
+  clip(400,'Mob Psycho 100 — موب سايكو','99','MOB CHOIR','Crunchyroll','Bw-5Lka7gPE',35,'شيغيو كاغياما ومكتب ريغن.'),
+  clip(400,'Fullmetal Alchemist: Brotherhood — الخيميائي المعدني','Again','YUI','YUI / Sony Music Labels','0NJCpJZ19n8',45,'أخَوان يحاولان استعادة جسديهما.'),
+  clip(600,'Land of the Lustrous — Houseki no Kuni','Kyoumen no Nami','YURiKA','TOHO animation','WvupNifis2g',45,'كائنات بلورية تقاتل القمريين.'),
+  clip(600,'ACCA: 13-Territory Inspection Dept.','Shadow and Truth','ONE III NOTES','ONE III NOTES / NexTone','B_BRs_DTvqo',50,'جان أوتوس يفتش مقاطعات مملكة دوا.'),
+  clip(600,'Odd Taxi — أود تاكسي','ODDTAXI','Skirt and PUNPEE','Crunchyroll','zI_cLtW3PnA',30,'سائق أجرة يُدعى أودوكاوا.'),
+  clip(600,'Shouwa Genroku Rakugo Shinjuu','Usurahi Shinjuu','Megumi Hayashibara','KING RECORDS','a_UxWeBT1BY',40,'ياكومو ويوتارو وفن سرد الراكوغو.'),
+);
+AUDIO_BANKS['anime-ed'].push(
+  clip(200,'SPY×FAMILY — عائلة فورجر','Comedy','Gen Hoshino','Gen Hoshino','D_Oyplmhhv0',45,'آنيا ووالداها ذوا الهويتين السريتين.'),
+  clip(200,'Chainsaw Man — رجل المنشار','CHAINSAW BLOOD','Vaundy','Vaundy','FL1QjjkZVm4',45,'دينجي وبوتشيتا.'),
+  clip(200,'Jujutsu Kaisen — أرك الماضي / Hidden Inventory','Akari','Soushi Sakiyama','Soushi Sakiyama','4jWzGkRsHw8',45,'غوجو وغيتو في شبابهما.'),
+  clip(200,'My Hero Academia — أكاديمية بطلي','HEROES','Brian the Sun','Brian the Sun / Sony Music Labels','6DVEjsJhcCA',40,'إيزوكو ميدوريا يسعى لوراثة لقب رمز السلام.'),
+  clip(400,'Blood Blockade Battlefront — Kekkai Sensen','Sugar Song to Bitter Step','UNISON SQUARE GARDEN','UNISON SQUARE GARDEN / TOY’S FACTORY','QkksQoqMakQ',45,'ليوناردو ووتش ومنظمة ليبرا.'),
+  clip(400,'Vinland Saga — ملحمة فينلاند','Torches','Aimer','Aimer / Sony Music Labels','_jTCDPWy0tw',50,'ثورفين وأبوه ثورز.'),
+  clip(400,'Mob Psycho 100 II — الموسم الثاني','Memosepia','sajou no hana','Crunchyroll','4p_OmTMlZXw',30,'شيغيو يتعلم التوازن بين قواه وحياته.'),
+  clip(400,'Link Click — Shiguang Dailiren','OverThink','Fan Ka','Wakanim','ehzk_lrkWh0',25,'متجر تصوير يستطيع دخول ذكريات الصور.'),
+  clip(600,'Girls’ Last Tour — Shoujo Shuumatsu Ryokou','More One Night','Chito & Yuuri (Inori Minase & Yurika Kubo)','KADOKAWA / Artist Topic','cUtOgwdJNUE',50,'فتاتان ومركبة كيتنكراد في مدينة مهجورة.'),
+  clip(600,'Land of the Lustrous — Houseki no Kuni','Kirameku Hamabe','Yuiko Ohara','Yuiko Ohara Official YouTube','cfOAY-1ir1c',50,'فوس البلورية تبحث عن دور تؤديه.'),
+  clip(600,'From the New World — Shinsekai Yori','Wareta Ringo','Saki Watanabe (Risa Taneda)','PONY CANYON / Artist Topic','AuFdVEtAwjs',50,'مجتمع بشري تُحكمه القدرات النفسية بعد ألف عام.'),
+  clip(600,'Tsuki ga Kirei — كجمال القمر','Tsuki ga Kirei','Nao Toyama','FlyingDog','nw2Uw0Eww_w',40,'أكاني وكوتارو في سنتهما الأخيرة من المتوسطة.'),
+);
+AUDIO_BANKS['song-recognition'].push(
+  clip(200,'Adventure of a Lifetime — Coldplay','Adventure of a Lifetime','Coldplay','Coldplay','QtXby3twMmI',70,'من ألبوم A Head Full of Dreams.'),
+  clip(200,'Waiting for the End — Linkin Park','Waiting for the End','Linkin Park','Linkin Park','5qF_qbaWt3Q',65,'من ألبوم A Thousand Suns.'),
+  clip(200,'On Melancholy Hill — Gorillaz','On Melancholy Hill','Gorillaz','Gorillaz','04mfKJWDSzI',55,'فرقة افتراضية من مشروع ديمون ألبارن.'),
+  clip(200,'Fluorescent Adolescent — Arctic Monkeys','Fluorescent Adolescent','Arctic Monkeys','Arctic Monkeys / Domino','ma9I9VBKPiw',45,'من ألبوم Favourite Worst Nightmare.'),
+  clip(400,'Let It Happen — Tame Impala','Let It Happen','Tame Impala','Tame Impala','pFptt7Cargc',65,'مشروع كيفن باركر وألبوم Currents.'),
+  clip(400,'Shake It Out — Florence + The Machine','Shake It Out','Florence + The Machine','Florence + The Machine','WbN0nX61rIs',55,'من ألبوم Ceremonials.'),
+  clip(400,'Holocene — Bon Iver','Holocene','Bon Iver','Bon Iver','TWcyIpul8OE',65,'جاستن فيرنون ومشاهد آيسلندية في الفيديو.'),
+  clip(400,'Gooey — Glass Animals','Gooey','Glass Animals','Glass Animals','jeo3an2M_Lo',55,'من ألبوم ZABA.'),
+  clip(600,'Helplessness Blues — Fleet Foxes','Helplessness Blues','Fleet Foxes','Sub Pop','7HHgedNNQco',65,'عنوان ألبوم الفرقة الصادر سنة 2011.'),
+  clip(600,'Riverside — Agnes Obel','Riverside','Agnes Obel','Agnes Obel / PIAS','vjncyiuwwXQ',55,'من ألبوم Philharmonics.'),
+  clip(600,'Youth — Daughter','Youth','Daughter','Daughter','2QT5eGHCJdE',65,'فرقة إيلينا تونرا؛ من ألبوم If You Leave.'),
+  clip(600,'Show Me How — Men I Trust','Show Me How','Men I Trust','Men I Trust','OZRYzH0Q0pU',50,'ثلاثي كندي وصوت إيما برولكس.'),
+);

@@ -1,13 +1,13 @@
 {
   "name": "lamma-trivia",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "private": true,
   "type": "module",
   "description": "Arabic team trivia with a curated category library and Anime OP & ED",
   "scripts": {
     "dev": "node server.mjs",
     "build": "node scripts/build.mjs",
-    "test": "node --test tests/*.test.mjs",
-    "check": "node --check app.mjs && node --check core.mjs && node --check data.mjs && node --check media.mjs && node --check audio-view.mjs && node --check question-bank.mjs && node --check audio-bank.mjs && node --check answer-images.mjs && node --check answer-image-data.mjs"
+    "test": "node scripts/test.mjs",
+    "check": "node --check app.mjs && node --check core.mjs && node --check data.mjs && node --check media.mjs && node --check audio-view.mjs && node --check question-bank.mjs && node --check audio-bank.mjs && node --check question-expansion.mjs && node --check question-history.mjs && node --check answer-images.mjs && node --check answer-image-data.mjs"
   }
 }

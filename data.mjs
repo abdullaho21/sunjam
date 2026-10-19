@@ -3,7 +3,7 @@ import {BANKS} from './question-bank.mjs';
 import {AUDIO_BANKS} from './audio-bank.mjs';
 import {validateMedia,clipUrls} from './media.mjs';
 
-export const CONTENT_REVISION = 2;
+export const CONTENT_REVISION = 3;
 export const CATEGORIES = [];
 export const QUESTIONS = [];
 const palette={أنمي:['lavender','✦'],ألعاب:['mint','⌘'],عام:['peach','◎'],دول:['sky','◉'],إسلامي:['mint','☾'],السعودية:['sand','✧'],تفكير:['yellow','?'],'فن أجنبي':['rose','▷'],رياضة:['sky','◈'],حروف:['peach','أ'],بباي:['yellow','★']};
@@ -84,6 +84,26 @@ export const REQUESTED_IDS=['anime-op','anime-ed','rdr2','expedition-33','roguel
 
 // References for specifically checked mechanics and side-quest details.
 const checkedSources = {
+  'quran-v2-1':'https://quran.com/18/25',
+  'quran-v2-17':'https://quran.com/21/85',
+  'quran-v2-18':'https://quran.com/53/49',
+  'roguelites-v2-6':'https://balatrowiki.org/w/Legendary_Jokers',
+  'expedition-33-v2-11':'https://clair-obscur.fandom.com/wiki/Swift_Stride',
+  'expedition-33-v2-14':'https://clair-obscur.fandom.com/wiki/Skills',
+  'expedition-33-v2-15':'https://clair-obscur.fandom.com/wiki/Skills',
+  'expedition-33-v2-16':'https://expedition33.wiki.fextralife.com/Chevalam',
+  'expedition-33-v2-17':'https://expedition33.wiki.fextralife.com/Thermal_Transfer',
+  'naruto-v2-6':'https://naruto.fandom.com/wiki/Shin',
+  'naruto-v2-15':'https://naruto.fandom.com/wiki/Ibuse',
+  'naruto-v2-18':'https://naruto.fandom.com/wiki/Dance_of_the_Seedling_Fern',
+  'character-action-v2-6':'https://devilmaycry.fandom.com/wiki/King_Cerberus_(Devil_Arm)',
+  'character-action-v2-18':'https://devilmaycry.fandom.com/wiki/Dr._Faust',
+  'valorant-v2-15':'https://wiki.playvalorant.com/en-us/Fade',
+  'valorant-v2-16':'https://wiki.playvalorant.com/en-us/Yoru',
+  'valorant-v2-17':'https://wiki.playvalorant.com/en-us/Astra',
+  'valorant-v2-18':'https://wiki.playvalorant.com/en-us/Harbor',
+  'harry-potter-v2-17':'https://harrypotter.fandom.com/wiki/Advanced_Potion-Making',
+  'saudi-v2-12':'https://whc.unesco.org/en/list/1712/',
   'rdr2-v2-3':'https://reddead.fandom.com/wiki/Advertising,_The_New_American_Art',
   'expedition-33-v2-4':'https://en.wikipedia.org/wiki/Clair_Obscur:_Expedition_33',
   'expedition-33-v2-5':'https://clair-obscur.fandom.com/wiki/Skills',
@@ -93,6 +113,9 @@ const checkedSources = {
   'dragon-ball-v2-6':'https://dragonball.fandom.com/wiki/South_Supreme_Kai',
 };
 for (const q of QUESTIONS) if(checkedSources[q.id]) q.source=checkedSources[q.id];
+
+const replacedArt=new Set(['quran-v2-1','roguelites-v2-6','anime-v2-4','linear-fps-v2-5','character-action-v2-6','naruto-v2-6','one-piece-v2-5','hunter-v2-6','resident-evil-v2-5','valorant-v2-6','geography-v2-5','currencies-v2-5','islam-v2-6','cartoons-v2-6']);
+for(const q of QUESTIONS)if(replacedArt.has(q.id))q.answerImages=[];
 
 // Store artwork with the question so exports and new saved matches retain it.
 for(const q of QUESTIONS){const images=answerImagesFor(q);if(images.length)q.answerImages=images;}

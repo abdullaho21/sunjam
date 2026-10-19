@@ -38,3 +38,14 @@ dialog{padding:0;border:0;border-radius:21px;background:white;color:var(--ink);m
 .answer-image figcaption{padding:10px 12px;display:flex;flex-direction:column;gap:5px;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
 .answer-image figcaption a{font-size:11px;color:#6b42db}
 @media(max-width:520px){.answer-images{grid-template-columns:minmax(0,1fr)}.answer-image img,.answer-images.single img{height:220px}}
+
+/* The opaque curtain is present before the external player is created. */
+.clip-screen{position:relative;isolation:isolate;overflow:hidden;background:#000;border-radius:16px;min-height:220px;aspect-ratio:16/9;margin:18px 0;color:#fff}
+.clip-picture{position:absolute;inset:0;z-index:0}
+#clip-player .clip-picture iframe{display:block;width:100%;height:100%;min-height:200px;margin:0;border:0;border-radius:0}
+.clip-curtain{position:absolute;inset:0;z-index:2;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;user-select:none}
+.clip-curtain span{font-size:46px;color:#c8b2f7}.clip-curtain p{color:#ddd;font-size:15px;margin:12px 0}
+.show-clip-picture .clip-curtain{display:none}.audio-controls{flex-wrap:wrap}.audio-controls button{flex:1;min-width:125px}
+@media(max-width:500px){.clip-screen{min-height:205px}.clip-curtain span{font-size:36px}}
+
+.board-category .category-progress{display:block;font-size:10px;line-height:1.6;opacity:.8;font-weight:400;margin-top:5px}

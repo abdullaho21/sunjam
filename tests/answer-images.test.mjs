@@ -16,7 +16,7 @@ test('answer pictures are absent before reveal and include accessible images and
 });
 test('curated coverage includes every music round and the main requested game portraits',()=>{
  const illustrated=QUESTIONS.filter(q=>answerImagesFor(q).length);
- assert.ok(illustrated.length>=130);
+ assert.ok(illustrated.length>=150);
  for(const q of QUESTIONS.filter(q=>q.type==='audio'))assert.ok(answerImagesFor(q).length,q.id);
  assert.match(answerImagesFor(gustave)[0].url,/Gustave/);
  assert.match(answerImagesFor(QUESTIONS.find(q=>q.id==='rdr2-v2-1'))[0].url,/ArthurMorgan/);
@@ -25,7 +25,7 @@ test('curated coverage includes every music round and the main requested game po
 test('image metadata survives full bank import, game persistence and legacy seed matches',()=>{
  const pack=validatePack(JSON.parse(JSON.stringify({version:1,categories:CATEGORIES,questions:QUESTIONS})));
  assert.deepEqual(pack.questions.find(q=>q.id===gustave.id).answerImages,gustave.answerImages);
- const g=createGame(['anime-op','anime-ed','rdr2','expedition-33','witcher-3','baldurs-gate-3'],['A','B'],CATEGORIES,QUESTIONS);
+ const g=createGame(['anime-op','anime-ed','rdr2','expedition-33','witcher-3','baldurs-gate-3'],['A','B'],CATEGORIES,QUESTIONS,60,()=>0.999);
  const q=g.deck.find(q=>q.id===gustave.id);openQuestion(g,q.slot);revealAnswer(g);
  const restored=JSON.parse(JSON.stringify(g));assert.ok(isGame(restored));
  assert.deepEqual(answerImagesFor(restored.deck.find(q=>q.id===gustave.id)),gustave.answerImages);

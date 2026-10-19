@@ -8,12 +8,12 @@ const music=QUESTIONS.filter(q=>AUDIO_CATEGORY_IDS.includes(q.categoryId));
 const pack={version:1,categories:CATEGORIES,questions:QUESTIONS};
 
 test('all music rounds have real media, 15-second bounds and explicit difficulty coverage',()=>{
- assert.equal(music.length,18);
- assert.equal(QUESTIONS.length,306);
+ assert.equal(music.length,54);
+ assert.equal(QUESTIONS.length,918);
  for(const id of AUDIO_CATEGORY_IDS){
    const rows=music.filter(q=>q.categoryId===id);
-   assert.equal(rows.length,6);
-   for(const points of [200,400,600])assert.equal(rows.filter(q=>q.points===points).length,2);
+   assert.equal(rows.length,18);
+   for(const points of [200,400,600])assert.equal(rows.filter(q=>q.points===points).length,6);
    for(const q of rows){assert.equal(q.type,'audio');assert.equal(q.media.endSeconds-q.media.startSeconds,15);assert.ok(q.media.channel);}
  }
  assert.match(music.find(q=>q.categoryId==='anime-op'&&q.points===200).answer,/Demon Slayer/);
@@ -46,7 +46,7 @@ test('text-only imports cannot reintroduce text music rounds; legacy storage can
  const categories=CATEGORIES.filter(c=>c.id==='anime-op');
  const questions=music.filter(q=>q.categoryId==='anime-op').map(({media,...q})=>({...q,type:'text'}));
  assert.throws(()=>validatePack({version:1,categories,questions}));
- assert.equal(validatePack({version:1,categories,questions},{allowLegacyAudioText:true}).questions.length,6);
+ assert.equal(validatePack({version:1,categories,questions},{allowLegacyAudioText:true}).questions.length,18);
  assert.throws(()=>validatePack({...pack,questions:QUESTIONS.map(q=>q.type==='audio'?{...q,media:{...q.media,endSeconds:0}}:q)}));
 });
 test('all seed rows are unique within a category, and reverse clues actually reverse the answer',()=>{
@@ -61,7 +61,7 @@ test('all seed rows are unique within a category, and reverse clues actually rev
 test('different clips sharing one listening prompt have distinct import identities',async()=>{
  const {questionKey}=await import('../core.mjs');
  const samePrompt=music.filter(q=>q.categoryId==='anime-op');
- assert.equal(new Set(samePrompt.map(questionKey)).size,6);
+ assert.equal(new Set(samePrompt.map(questionKey)).size,18);
  assert.equal(questionKey({...samePrompt[0],id:'another-id'}),questionKey(samePrompt[0]));
  assert.notEqual(questionKey({...samePrompt[0],media:{...samePrompt[0].media,startSeconds:60,endSeconds:75}}),questionKey(samePrompt[0]));
 });

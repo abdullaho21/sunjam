@@ -30,13 +30,13 @@ export function createGame(ids, names, categories, questionBank, seconds = 60, r
     }
     chosen.forEach((q,i) => deck.push({...q,slot:`${id}:${i}`,resolved:false,winner:null,awarded:0}));
   }
-  return {version:1,contentRevision:2,id:`game-${Date.now()}`,createdAt:new Date().toISOString(),categoryIds:[...ids],teams:names.map(name => ({name:String(name).trim().slice(0,30),score:0,helpers:{hint:false,time:false,double:false}})),turn:0,seconds:[30,60,90].includes(Number(seconds))?Number(seconds):60,deck,active:null,history:[],finished:false};
+  return {version:1,contentRevision:3,id:`game-${Date.now()}`,createdAt:new Date().toISOString(),categoryIds:[...ids],teams:names.map(name => ({name:String(name).trim().slice(0,30),score:0,helpers:{hint:false,time:false,double:false}})),turn:0,seconds:[30,60,90].includes(Number(seconds))?Number(seconds):60,deck,active:null,history:[],finished:false};
 }
 export function openQuestion(game, slot, now=Date.now()) {
   if(game.active || game.finished) throw new Error('أكمل السؤال الحالي أولاً');
   const q=game.deck.find(q=>q.slot===slot);
   if(!q || q.resolved) throw new Error('هذا السؤال منتهٍ');
-  game.active={slot,deadline:now+game.seconds*1000,remaining:game.seconds,paused:q.type==='audio',revealed:false,hint:false,multiplier:1};
+  game.active={slot,deadline:now+game.seconds*1000,remaining:game.seconds,paused:q.type==='audio',revealed:false,hint:false,multiplier:1,helpersBefore:{...game.teams[game.turn].helpers}};
   return game;
 }
 export function useHelper(game, kind) {
@@ -48,7 +48,7 @@ export function useHelper(game, kind) {
   if(kind==='double') game.active.multiplier=2;
   return game;
 }
-export function revealAnswer(game) { if(!game.active) throw new Error('لا يوجد سؤال');game.active.revealed=true;return game; }
+export function revealAnswer(game) { if(!game.active) throw new Error('لا يوجد سؤال');game.active.revealed=true;game.deck.find(q=>q.slot===game.active.slot).answerSeen=true;return game; }
 export function resolveQuestion(game, winner) {
   if(!game.active?.revealed || ![0,1,null].includes(winner)) throw new Error('اكشف الإجابة قبل تسجيل النتيجة');
   const q=game.deck.find(q=>q.slot===game.active.slot);
