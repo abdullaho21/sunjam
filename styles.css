@@ -49,3 +49,5 @@ dialog{padding:0;border:0;border-radius:21px;background:white;color:var(--ink);m
 @media(max-width:500px){.clip-screen{min-height:205px}.clip-curtain span{font-size:36px}}
 
 .board-category .category-progress{display:block;font-size:10px;line-height:1.6;opacity:.8;font-weight:400;margin-top:5px}
+
+.change-selection{margin:0 0 20px;font-weight:700}.board-slot-count{display:block;font-size:11px;line-height:1.6;font-weight:400;margin-top:4px}

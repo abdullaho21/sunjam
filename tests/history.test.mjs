@@ -7,21 +7,21 @@ const ids=['rdr2','expedition-33','witcher-3','anime-op','anime-ed','song-recogn
 const make=()=>createGame(ids,['A','B'],CATEGORIES,QUESTIONS);
 const answer=(g,q,h)=>{openQuestion(g,q.slot);revealAnswer(g);resolveQuestion(g,null);recordFinished(h,q);};
 
-test('three matches finish all 18 questions in every selected category without repeating',()=>{
+test('four matches finish all 24 questions in every selected category without repeating',()=>{
  const history=readHistory(null),seen=new Set();
- for(let match=0;match<3;match++){
+ for(let match=0;match<4;match++){
   const g=make();
   for(const tile of [...g.deck]){
    const q=drawForSlot(g,tile.slot,QUESTIONS,history);
    assert.ok(!seen.has(q.id),q.id);seen.add(q.id);answer(g,q,history);
   }
  }
- assert.equal(seen.size,108);
- for(const id of ids)assert.deepEqual(categoryProgress(history,id,QUESTIONS),{finished:18,total:18,cycle:0,complete:true});
+ assert.equal(seen.size,144);
+ for(const id of ids)assert.deepEqual(categoryProgress(history,id,QUESTIONS),{finished:24,total:24,cycle:0,complete:true});
  const g=make(),q=drawForSlot(g,'rdr2:0',QUESTIONS,history);
  assert.ok(seen.has(q.id));assert.equal(categoryProgress(history,'rdr2',QUESTIONS).cycle,1);
  assert.equal(categoryProgress(history,'rdr2',QUESTIONS).finished,0);
- assert.equal(categoryProgress(history,'expedition-33',QUESTIONS).finished,18);
+ assert.equal(categoryProgress(history,'expedition-33',QUESTIONS).finished,24);
 });
 test('finished tier waits for the whole category rather than repeating early',()=>{
  const history=readHistory(null);
@@ -51,7 +51,7 @@ test('reveal cannot be abandoned; undo keeps the revealed question for score cor
 test('history is idempotent, ignores removed questions and includes newly added ones',()=>{
  const h=readHistory(null),pool=QUESTIONS.filter(q=>q.categoryId==='rdr2');
  for(const q of pool){recordFinished(h,q);recordFinished(h,q);}
- assert.equal(h.categories.rdr2.finished.length,18);
+ assert.equal(h.categories.rdr2.finished.length,24);
  const bank=[...QUESTIONS,{...pool[0],id:'rdr2-future',question:'New question'}];
  assert.equal(categoryProgress(h,'rdr2',bank).complete,false);
  const g=make();assert.equal(drawForSlot(g,'rdr2:0',bank,h).id,'rdr2-future');
@@ -80,7 +80,25 @@ test('only one unseen question left is retained instead of repeating a finished 
 
 test('unanswered draws rotate across different tiles and matches, not only within one tile',()=>{
  const h=readHistory(null),seen=new Set();
- for(let i=0;i<6;i++){const g=make();const q=drawForSlot(g,`rdr2:${i%2}`,QUESTIONS,h);assert.ok(!seen.has(q.id));seen.add(q.id);openQuestion(g,q.slot);abandonQuestion(g);}
+ for(let i=0;i<8;i++){const g=make();const q=drawForSlot(g,`rdr2:${i%2}`,QUESTIONS,h);assert.ok(!seen.has(q.id));seen.add(q.id);openQuestion(g,q.slot);abandonQuestion(g);}
  assert.equal(categoryProgress(h,'rdr2',QUESTIONS).finished,0);
  const g=make();const last=h.categories.rdr2.encountered.at(-1);assert.notEqual(drawForSlot(g,'rdr2:0',QUESTIONS,h).id,last);
+});
+
+test('BG3 400 selection can be cancelled, replaced, and changed to another category without scoring',()=>{
+ const g=createGame(['baldurs-gate-3',...ids.slice(0,5)],['A','B'],CATEGORIES,QUESTIONS),h=readHistory(null);
+ const first=drawForSlot(g,'baldurs-gate-3:2',QUESTIONS,h);
+ openQuestion(g,first.slot);abandonQuestion(g);
+ const next=drawForSlot(g,first.slot,QUESTIONS,h);assert.notEqual(next.id,first.id);
+ openQuestion(g,next.slot);revealAnswer(g);
+ assert.equal(abandonQuestion(g,{allowRevealed:true,history:h}),true);
+ assert.equal(g.active,null);assert.equal(g.turn,0);assert.equal(g.teams[0].score,0);assert.equal(g.history.length,0);
+ assert.ok(h.categories['baldurs-gate-3'].finished.includes(next.id));
+ assert.notEqual(drawForSlot(g,first.slot,QUESTIONS,h).id,next.id);
+ openQuestion(g,'rdr2:0');assert.equal(g.active.slot,'rdr2:0');
+});
+test('cancelling an undone question clears its answerSeen lock and allows a fresh draw',()=>{
+ const g=make(),h=readHistory(null),q=drawForSlot(g,'rdr2:0',QUESTIONS,h);
+ answer(g,q,h);undoLast(g);openQuestion(g,q.slot);abandonQuestion(g);
+ assert.notEqual(drawForSlot(g,q.slot,QUESTIONS,h).id,q.id);
 });

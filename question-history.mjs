@@ -58,11 +58,15 @@ export function drawForSlot(game,slot,bank,history,rng=Math.random) {
   history.categories[old.categoryId]=s.entry;
   game.deck[index]=next;return next;
 }
-export function abandonQuestion(game) {
+export function abandonQuestion(game,{allowRevealed=false,history}={}) {
   const a=game.active;
-  if(!a)return false;
-  if(a.revealed)return false;
+  if(!a||a.revealed&&!allowRevealed)return false;
+  const q=game.deck.find(q=>q.slot===a.slot);
+  // Seeing an answer is remembered, but it never forces a score or locks the tile.
+  if(a.revealed&&history)recordFinished(history,q);
   if(a.helpersBefore)game.teams[game.turn].helpers={...a.helpersBefore};
+  delete q.answerSeen;
+  q.encountered=true;
   game.active=null;
   return true;
 }

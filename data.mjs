@@ -3,7 +3,7 @@ import {BANKS} from './question-bank.mjs';
 import {AUDIO_BANKS} from './audio-bank.mjs';
 import {validateMedia,clipUrls} from './media.mjs';
 
-export const CONTENT_REVISION = 3;
+export const CONTENT_REVISION = 4;
 export const CATEGORIES = [];
 export const QUESTIONS = [];
 const palette={أنمي:['lavender','✦'],ألعاب:['mint','⌘'],عام:['peach','◎'],دول:['sky','◉'],إسلامي:['mint','☾'],السعودية:['sand','✧'],تفكير:['yellow','?'],'فن أجنبي':['rose','▷'],رياضة:['sky','◈'],حروف:['peach','أ'],بباي:['yellow','★']};
@@ -84,6 +84,27 @@ export const REQUESTED_IDS=['anime-op','anime-ed','rdr2','expedition-33','roguel
 
 // References for specifically checked mechanics and side-quest details.
 const checkedSources = {
+  'metroidvania-v2-23':'https://hollowknight.wiki/w/Spell_Twister',
+  'technology-v2-21':'https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2',
+  'technology-v2-22':'https://www.rfc-editor.org/rfc/rfc9293.html#section-3.5',
+  'technology-v2-23':'https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/package-summary.html',
+  'technology-v2-24':'https://lamport.azurewebsites.net/pubs/time-clocks.pdf',
+
+  'expedition-33-v2-18':'https://expedition33.wiki.fextralife.com/Cheater',
+  'expedition-33-v2-23':'https://clair-obscur.fandom.com/wiki/Medalum',
+  'expedition-33-v2-24':'https://clair-obscur.fandom.com/wiki/Skills',
+  'baldurs-gate-3-v2-17':'https://bg3.wiki/wiki/Grym',
+  'baldurs-gate-3-v2-23':'https://bg3.wiki/wiki/Bernard',
+  'baldurs-gate-3-v2-24':'https://bg3.wiki/wiki/BOOOAL%27s_Benediction',
+  'naruto-v2-16':'https://naruto.fandom.com/wiki/Earth_Grudge_Fear',
+  'pokemon-v2-17':'https://bulbapedia.bulbagarden.net/wiki/Wonder_Guard_(Ability)',
+  'pokemon-v2-18':'https://bulbapedia.bulbagarden.net/wiki/Hidden_Power_(move)',
+  'minecraft-v2-16':'https://minecraft.wiki/w/Beacon',
+  'minecraft-v2-17':'https://minecraft.wiki/w/Conduit',
+  'witcher-3-v2-4':'https://witcher.fandom.com/wiki/Mask_of_Uroboros',
+  'linear-fps-v2-24':'https://bioshock.fandom.com/wiki/Lot_192',
+  'islam-v2-23':'https://sunnah.com/bukhari:4987',
+
   'quran-v2-1':'https://quran.com/18/25',
   'quran-v2-17':'https://quran.com/21/85',
   'quran-v2-18':'https://quran.com/53/49',
@@ -114,7 +135,7 @@ const checkedSources = {
 };
 for (const q of QUESTIONS) if(checkedSources[q.id]) q.source=checkedSources[q.id];
 
-const replacedArt=new Set(['quran-v2-1','roguelites-v2-6','anime-v2-4','linear-fps-v2-5','character-action-v2-6','naruto-v2-6','one-piece-v2-5','hunter-v2-6','resident-evil-v2-5','valorant-v2-6','geography-v2-5','currencies-v2-5','islam-v2-6','cartoons-v2-6']);
+const replacedArt=new Set(['witcher-3-v2-4','baldurs-gate-3-v2-17','expedition-33-v2-18','naruto-v2-16','pokemon-v2-17','pokemon-v2-18','minecraft-v2-16','minecraft-v2-17','quran-v2-1','roguelites-v2-6','anime-v2-4','linear-fps-v2-5','character-action-v2-6','naruto-v2-6','one-piece-v2-5','hunter-v2-6','resident-evil-v2-5','valorant-v2-6','geography-v2-5','currencies-v2-5','islam-v2-6','cartoons-v2-6']);
 for(const q of QUESTIONS)if(replacedArt.has(q.id))q.answerImages=[];
 
 // Store artwork with the question so exports and new saved matches retain it.

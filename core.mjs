@@ -30,7 +30,7 @@ export function createGame(ids, names, categories, questionBank, seconds = 60, r
     }
     chosen.forEach((q,i) => deck.push({...q,slot:`${id}:${i}`,resolved:false,winner:null,awarded:0}));
   }
-  return {version:1,contentRevision:3,id:`game-${Date.now()}`,createdAt:new Date().toISOString(),categoryIds:[...ids],teams:names.map(name => ({name:String(name).trim().slice(0,30),score:0,helpers:{hint:false,time:false,double:false}})),turn:0,seconds:[30,60,90].includes(Number(seconds))?Number(seconds):60,deck,active:null,history:[],finished:false};
+  return {version:1,contentRevision:4,id:`game-${Date.now()}`,createdAt:new Date().toISOString(),categoryIds:[...ids],teams:names.map(name => ({name:String(name).trim().slice(0,30),score:0,helpers:{hint:false,time:false,double:false}})),turn:0,seconds:[30,60,90].includes(Number(seconds))?Number(seconds):60,deck,active:null,history:[],finished:false};
 }
 export function openQuestion(game, slot, now=Date.now()) {
   if(game.active || game.finished) throw new Error('أكمل السؤال الحالي أولاً');

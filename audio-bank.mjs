@@ -74,3 +74,29 @@ AUDIO_BANKS['song-recognition'].push(
   clip(600,'Youth — Daughter','Youth','Daughter','Daughter','2QT5eGHCJdE',65,'فرقة إيلينا تونرا؛ من ألبوم If You Leave.'),
   clip(600,'Show Me How — Men I Trust','Show Me How','Men I Trust','Men I Trust','OZRYzH0Q0pU',50,'ثلاثي كندي وصوت إيما برولكس.'),
 );
+
+// Six further recordings per category, keeping prior IDs stable.
+AUDIO_BANKS['anime-op'].push(
+  clip(200,'Demon Slayer — أرك حي الترفيه','Zankyosanka','Aimer','Aimer Official YouTube Channel','tLQLa6lM3Us',45,'تينغن أوزوي ورفاقه في حي الترفيه.'),
+  clip(200,'Kaiju No. 8 — كايجو رقم 8','Abyss','YUNGBLUD','YUNGBLUD','YJkOxWVn0SU',35,'كافكا هيبينو وقوات الدفاع.'),
+  clip(400,'Death Parade — ديث باريد','Flyers','BRADIO','Crunchyroll','Ca5Tf5BDSYI',25,'حانة كوينديكيم وألعاب الحكم على الزوار.'),
+  clip(400,'Durarara!! — دورارارا','Complication','ROOKiEZ is PUNK’D','ROOKiEZ is PUNK’D / Sony Music Labels / Topic','HkQ_mzbC_WY',50,'عصابات إكيبوكورو وراكبة الدراجة بلا رأس.'),
+  clip(600,'Katanagatari — إعادة العرض عام 2013','Hakushu Kassai Utaawase','supercell','ryo (supercell) / Sony Music Labels','gifxbyjWElY',45,'شيتشيكا وتوغامي في رحلة لجمع السيوف.'),
+  clip(600,'Ergo Proxy — إرغو بروكسي','Kiri','MONORAL','MONORAL / CD Baby / Topic','rIi9LLqx5t4',50,'ريل ماير وفينسنت لو ومدينة رومدو.'),
+);
+AUDIO_BANKS['anime-ed'].push(
+  clip(200,'Demon Slayer: Mugen Train — فيلم القطار اللانهائي','Homura','LiSA','LiSA Official YouTube','4DxL6IKmXx4',50,'أغنية ختام الفيلم الذي يشارك فيه رينغوكو.'),
+  clip(200,'Naruto Shippuden — ناروتو شيبودن','Utakata Hanabi','supercell','ryo (supercell) / Sony Music Labels','e6edTTwERyE',50,'إحدى شارات النهاية خلال أحداث ماضي كونوها.'),
+  clip(400,'Fullmetal Alchemist: Brotherhood — الخيميائي المعدني','Uso','SID','SID Official YouTube','eglYGbybkrY',45,'أول شارة نهاية لهذا الاقتباس من مغامرة الأخوين إلريك.'),
+  clip(400,'Natsume’s Book of Friends Go — الموسم الخامس','Akane Sasu','Aimer','Aimer Official YouTube Channel','bN1t3-2X3aM',50,'ناتسومي ودفتر الأسماء ونْيانكو سينسي.'),
+  clip(600,'Ergo Proxy — إرغو بروكسي','Paranoid Android','Radiohead','Radiohead','fHiGbolFFGw',75,'شارة نهاية أنمي مدينة رومدو.'),
+  clip(600,'Mononoke — مونونوكي (2007)','Natsu no Hana','JUJU','JUJU / Sony Music Labels / Topic','9tmcOccV4KI',50,'بائع الأدوية وسيف طرد الأرواح؛ ليس فيلم الأميرة مونونوكي.'),
+);
+AUDIO_BANKS['song-recognition'].push(
+  clip(200,'Shiver — Coldplay','Shiver','Coldplay','Coldplay','u8XFFTWwSvY',60,'من ألبوم Parachutes.'),
+  clip(200,'Still Into You — Paramore','Still Into You','Paramore','Fueled By Ramen','OblL026SvD4',45,'صوت هايلي ويليامز ومن ألبوم الفرقة الذي يحمل اسمها.'),
+  clip(400,'Reckoner — Radiohead','Reckoner','Radiohead','Radiohead / XL Recordings / Beggars / Topic','pYHEpDnvVPk',60,'من ألبوم In Rainbows.'),
+  clip(400,'I Need My Girl — The National','I Need My Girl','The National','The National','A-Tod1_tZdU',55,'صوت مات بيرنينغر؛ من ألبوم Trouble Will Find Me.'),
+  clip(600,'Lullaby — Low','Lullaby','Low','Low / Universal Music Group / Topic','zEmtfA8FETc',150,'من ألبوم I Could Live in Hope الصادر عام 1994.'),
+  clip(600,'Feel You — Julia Holter','Feel You','Julia Holter','Domino Recording Co.','X2JgMniIpRM',50,'من ألبوم Have You in My Wilderness.'),
+);
