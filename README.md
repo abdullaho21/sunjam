@@ -21,6 +21,9 @@ node scripts/build.mjs
 
 `npm test`, `npm run build` and `npm run check` are also available. The static build copies 16 runtime files into `dist/`. `vercel.json` specifies the build command and output folder.
 
+GitHub Actions runs syntax checks, the complete test suite and the static build
+on Node.js 22 and 24 for pull requests and changes to `main`.
+
 ## Content
 
 There are **51 playable categories and 1,224 entries**: **1,152 text questions and 72 listening rounds**. Every category now has **24 entries**, eight per tier—six more than the preceding 18-entry revision. A match uses only two tiles per tier in each selected category.
